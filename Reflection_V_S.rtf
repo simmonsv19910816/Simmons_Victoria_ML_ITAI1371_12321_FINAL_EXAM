@@ -1,0 +1,117 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\froman\fcharset0 Times-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww17100\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Victoria Simmons\
+\pard\pardeftab720\sa240\qc\partightenfactor0
+\cf0 \ul \ulc0 \strokec2 ML FINAL EXAM
+\f1\b\fs36 \ulnone \strokec2 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f0\b0\fs24 \cf0 	This final project challenged me to build a complete machine\uc0\u8209 learning pipeline using a real Airbnb dataset. I worked through data cleaning, feature engineering, model training, evaluation, and ensemble learning. Seeing the transformation from raw, messy data to a fully trained predictive model helped me understand how each step in the ML workflow contributes to the final outcome.\
+\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 Data Cleaning & Preparation
+\f1\b\fs36 \ulnone \strokec2 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f0\b0\fs24 \cf0 	One of the first things I learned is how essential data cleaning is. The raw dataset had inconsistent formatting, missing values, and messy price fields. For example, the notebook shows how price and service fees were stripped of symbols and converted to numeric values:\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 \'93df[c] = df[c].astype(str).str.replace('$','',regex=False).str.replace(',','',regex=False)\'94 \
+I also handled missing values using medians for numeric columns and modes for categorical ones. Fixing typos like 
+\f2\fs26 "brookln"
+\f0\fs24  and 
+\f2\fs26 "manhatan"
+\f0\fs24  in the neighborhood column reminded me how small errors can affect model performance:\
+\'93df['neighbourhood_group'] = df['neighbourhood_group'].fillna('Unknown').replace(\{'brookln':'Brooklyn','manhatan':'Manhattan'\})\'94 \
+This part of the project taught me that clean data is the foundation of any reliable model.\
+\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 Feature Engineering
+\f1\b\fs36 \ulnone \strokec2 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f0\b0\fs24 \cf0 	Creating new features helped me understand how additional information can improve predictions. For example, I engineered a fee\uc0\u8209 to\u8209 price ratio:\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 \'93df['fee_to_price_ratio'] = df['service_fee'] / df['price']\'94 \
+I also scaled construction years and log\uc0\u8209 transformed review counts to reduce skew:\
+\'93df['reviews_log'] = np.log1p(df['number_of_reviews'])\'94 \
+These transformations made the data more suitable for machine\uc0\u8209 learning algorithms.\
+\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 Model Training
+\f1\b\fs36 \ulnone \strokec2 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f0\b0\fs24 \cf0 Training multiple models was one of the most rewarding parts of the assignment. I trained:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl480\slmult1\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\'95	}Logistic Regression\
+{\listtext	\'95	}Decision Tree\
+{\listtext	\'95	}Random Forest\
+{\listtext	\'95	}Gradient Boosting\
+{\listtext	\'95	}KNN\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	} \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 SVC\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 The notebook shows each model being fit:\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 \'93model.fit(X_train, y_train)\'94 \
+Comparing accuracy, precision, recall, F1\uc0\u8209 score, and ROC\u8209 AUC helped me understand how different algorithms behave with the same dataset.\
+\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 Ensemble Learning
+\f1\b\fs36 \ulnone \strokec2 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f0\b0\fs24 \cf0 The most advanced part of the project was building two ensemble models:\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 Soft Voting Ensemble
+\f1\b\fs28 \ulnone \strokec2 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f0\b0\fs24 \cf0 I selected the top three models based on F1\uc0\u8209 score:\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 \'93top3_names = results_df['Model'].head(3).tolist()\'94 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f1\b\fs28 \cf0 Bayesian Accuracy\uc0\u8209 Weighted Ensemble\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\f0\b0\fs24 \cf0 This ensemble averaged model probabilities using accuracy\uc0\u8209 based weights:\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 \'93return np.average(probs, axis=0, weights=weights)\'94 \
+This taught me how combining models can produce more stable and reliable predictions.\
+\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 Challenges I Overcame\ulnone \strokec2  
+\fs36 - 
+\fs24 Cleaning inconsistent price formats. Handling missing values. Balancing the dataset using downsampling. Understanding how categorical encoding affects model behavior. Comparing multiple models without getting overwhelmed. Learning how ensemble methods improve performance. Each challenge pushed me to think critically and apply what I learned throughout the course.\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 What I Learned 
+\fs36 \ulnone \strokec2 -
+\fs24 This project helped me understand the full lifecycle of a machine learning workflow: Data cleaning is not optional. I\'92ve learned it\'92s essential. Feature engineering can dramatically improve model performance. No single model is \'93best\'94 for every dataset. Ensembles often outperform individual models. Visualizations make results easier to interpret. GitHub is an important part of sharing and documenting work.\
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+\cf0 \
+\pard\pardeftab720\sl480\slmult1\partightenfactor0
+
+\fs26 \cf0 \ul \ulc0 \strokec2 Conclusion
+\fs36 \ulnone \strokec2 - 
+\fs24 Completing this final exam gave me confidence in my ability to build and evaluate machine\uc0\u8209 learning models from scratch. Uploading my notebook to GitHub allowed me to present my work professionally and clearly. This project tied together everything I learned in the course, and I\'92m proud of the pipeline I built.\
+}
